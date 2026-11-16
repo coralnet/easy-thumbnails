@@ -48,7 +48,8 @@ class FrameAware:
 
     def apply_to_frames(self, method, *args, **kwargs):
         new_frames = []
-        for i in range(self.im.n_frames):
+        n_frames = 1 if self.im.format == "MPO" else self.im.n_frames
+        for i in range(n_frames):
             self.im.seek(i)
             new_frames.append(method(*args, **kwargs))
         write_to = BytesIO()
